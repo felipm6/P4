@@ -221,13 +221,13 @@ namespace upc
 			em_maximization(data,weights);
 
 			inc_prob = new_prob - old_prob;
-        	old_prob = new_prob;
-        	if (inc_prob < inc_threshold){
+        old_prob = new_prob;
+        if (inc_prob < inc_threshold){
          	 break;
-        	}
+    	}
 
-			if (verbose & 01)
-				cout << "GMM nmix=" << nmix << "\tite=" << iteration << "\tlog(prob)=" << new_prob << "\tinc=" << inc_prob << endl;
+		if (verbose & 01)
+			cout << "GMM nmix=" << nmix << "\tite=" << iteration << "\tlog(prob)=" << new_prob << "\tinc=" << inc_prob << endl;
 		}
 		return 0;
 	}

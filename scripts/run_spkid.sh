@@ -28,6 +28,7 @@ LOG_CLASS=$w/class_${FEAT}_${name_exp}.log
 LOG_VERIF=$w/verif_${FEAT}_${name_exp}.log
 FINAL_CLASS=$w/class_test.log
 FINAL_VERIF=$w/verif_test.log
+world=users_and_others
 
 # Como el fichero con el resultado de la verificación final es diferente al
 # proporcionado por el programa gmm_verify, puede serle útil usar un fichero
@@ -160,7 +161,8 @@ for cmd in $*; do
        # Implement 'trainworld' in order to get a Universal Background Model for speaker verification
        #
        # - The name of the world model will be used by gmm_verify in the 'verify' command below.
-       echo "Implement the trainworld option ..."
+       EXEC="gmm_train -d $w/$FEAT/ -e $FEAT -g $w/gmm/$FEAT/$world.gmm -m 5 -N 10 -T 0.0001 -i 0 lists/verif/$world.train"
+       echo $EXEC && $EXEC || exit 1
 
    elif [[ $cmd == verify ]]; then
        ## @file

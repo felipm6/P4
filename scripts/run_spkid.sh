@@ -215,8 +215,10 @@ for cmd in $*; do
        # candidato para la señal a verificar. En $FINAL_VERIF se pide que la tercera columna sea 1,
        # si se considera al candidato legítimo, o 0, si se considera impostor. Las instrucciones para
        # realizar este cambio de formato están en el enunciado de la práctica.
-       echo "To be implemented ..."
-   
+       compute_$FEAT $db_test $lists/final/verif.test
+        EXEC="gmm_verify -d $w/$FEAT/ -e $FEAT -D $w/gmm/$FEAT/ -E gmm -w $world lists/gmm.list lists/final/all.test lists/final/verif.test.candidates"
+       echo $EXEC && $EXEC | tee $TEMP_VERIF || exit 1
+
    # If the command is not recognize, check if it is the name
    # of a feature and a compute_$FEAT function exists.
    elif [[ "$(type -t compute_$cmd)" = function ]]; then

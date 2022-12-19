@@ -194,7 +194,11 @@ for cmd in $*; do
        #
        # El fichero con el resultado del reconocimiento debe llamarse $FINAL_CLASS, que deberá estar en el
        # directorio de la práctica (PAV/P4).
+<<<<<<< HEAD
        compute_$FEAT $db_devel $lists/final/class.test 
+=======
+       compute_$FEAT $db_test $lists/final/class.test
+>>>>>>> 6ceade605a747746958d4b2c26dc155cfa038219
        EXEC="gmm_classify -d $w/$FEAT -e $FEAT -D $w/gmm/$FEAT -E gmm $lists/gmm.list $lists/final/class.test"
         echo $EXEC && $EXEC | tee $FINAL_CLASS || exit 1
    
@@ -215,8 +219,15 @@ for cmd in $*; do
        # candidato para la señal a verificar. En $FINAL_VERIF se pide que la tercera columna sea 1,
        # si se considera al candidato legítimo, o 0, si se considera impostor. Las instrucciones para
        # realizar este cambio de formato están en el enunciado de la práctica.
-       echo "To be implemented ..."
-   
+       compute_$FEAT $db_test $lists/final/verif.test
+        EXEC="gmm_verify -d $w/$FEAT/ -e $FEAT -D $w/gmm/$FEAT/ -E gmm -w $world lists/gmm.list lists/final/all.test lists/final/verif.test.candidates"
+       echo $EXEC && $EXEC | tee $TEMP_VERIF || exit 1
+
+        #umbral optimo encontrado con comando: verify verifyerr
+       perl -ane 'print "$F[0]\t$F[1]\t";
+        if ($F[2] > 0.366141481293663) {print "1\n"}
+        else {print "0\n"}' $TEMP_VERIF | tee $FINAL_VERIF
+
    # If the command is not recognize, check if it is the name
    # of a feature and a compute_$FEAT function exists.
    elif [[ "$(type -t compute_$cmd)" = function ]]; then

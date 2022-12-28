@@ -32,17 +32,46 @@ ejercicios indicados.
 - Analice el script `wav2lp.sh` y explique la misión de los distintos comandos involucrados en el *pipeline*
   principal (`sox`, `$X2X`, `$FRAME`, `$WINDOW` y `$LPC`). Explique el significado de cada una de las 
   opciones empleadas y de sus valores.
+  
+  · sox: transforma de WAV a i16.
+  · x2x: cambia el formato de los datos, en nuestro caso de i16 a f32.
+  · frame: corta en distintos frames el fichero, con -l y -p asignamos el desplazamiento y el tamaño del mismo.
+  · window: enventana los frames anteriores.
+  . lpc: calcula los coeficientes lpc del frame enventanado.
 
 - Explique el procedimiento seguido para obtener un fichero de formato *fmatrix* a partir de los ficheros de
   salida de SPTK (líneas 45 a 51 del script `wav2lp.sh`).
+  
+  · En primer lugar buscamos el numero de columnas y filas que tendra nuestro fichero, estos valores los calculamos anteriormente. Una vez preparados, pasamos de ascii a unit32 `-aI` y creamos un fichero con dichas columnas y filas para poder observar los datos de una manera mas comoda y visual. 
 
   * ¿Por qué es más conveniente el formato *fmatrix* que el SPTK?
 
+  · De esta manera ya almacenamos los datos en formato unit32 y no requieren combersiones para verlos. Solo tenemos que añadir una cabecera para que funcione.
+
 - Escriba el *pipeline* principal usado para calcular los coeficientes cepstrales de predicción lineal
   (LPCC) en su fichero <code>scripts/wav2lpcc.sh</code>:
+  
+  <code>
+# Main command for feature extration
+sox $inputfile -t raw -e signed -b 16 - |
+   $X2X +sf | 
+   $FRAME -l 240 -p 80 | 
+   $WINDOW -l 240 -L 240 |
+ 	 $LPC -l 240 -m $lpc_order | 
+   $LPCC -m $lpc_order -M $lpcc_order > $base.lpcc || exit 1
+  
+  </code>
 
 - Escriba el *pipeline* principal usado para calcular los coeficientes cepstrales en escala Mel (MFCC) en su
   fichero <code>scripts/wav2mfcc.sh</code>:
+  <code>
+# Main command for feature extration
+sox $inputfile -t raw -e signed -b 16 - | 
+   $X2X +sf | 
+   $FRAME -l 240 -p 80 | 
+   $WINDOW -l 240 -L 240 |
+	 $MFCC -l 240 -s 8 -w 0 -m $mfcc_order -n $mel_filter_bank_order > $base.mfcc || exit 1
+   </code>
 
 ### Extracción de características.
 

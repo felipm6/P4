@@ -103,6 +103,62 @@ ejercicios indicados.
     fmatrix_show work/mfcc/BLOCK02/SES022/*.mfcc | egrep '^\[' | cut -f4,5 > mfccout.txt
     ```
     
+    · A continuación solo tenemos que representar los datos, para eso hemos realizado un simple programa en python:
+    
+    ```.py
+    import matplotlib.pyplot as plt
+
+	# coeficientes LP
+	X, Y = [], []
+	for line in open('lpout.txt', 'r'):
+	  values = [float(s) for s in line.split()]
+ 	 X.append(values[0])
+	  Y.append(values[1])
+	plt.figure(1)
+	plt.plot(X, Y, 'b*', markersize=4)
+	plt.title('LP',fontsize=18)
+	plt.xlabel('coef 1')
+	plt.ylabel('coef 2')
+	plt.savefig('lpout.png')
+	plt.show()
+
+	# coeficientes LPCC
+	X, Y = [], []
+	for line in open('lpccout.txt', 'r'):
+	  values = [float(s) for s in line.split()]
+	  X.append(values[0])
+	  Y.append(values[1])
+	plt.figure(2)
+	plt.plot(X, Y, 'b*', markersize=4)
+	plt.title('LPCC',fontsize=18)
+	plt.xlabel('coef 1')
+	plt.ylabel('coef 2')
+	plt.savefig('lpccout.png')
+	plt.show()
+
+	# coeficientes MFCC
+	X, Y = [], []
+	for line in open('mfccout.txt', 'r'):
+	  values = [float(s) for s in line.split()]
+	  X.append(values[0])
+	  Y.append(values[1])
+	plt.figure(3)
+	plt.plot(X, Y, 'b*', markersize=4)
+	plt.title('MFCC',fontsize=18)
+	plt.xlabel('coef 1')
+	plt.ylabel('coef 2')
+	plt.savefig('mfccout.png')
+	plt.show()
+	```
+    · Coeficientes LP
+    ![lpout](https://user-images.githubusercontent.com/113842807/210063643-46a44d16-1b04-46be-9092-fb9361bbdd68.png)
+    
+    . Coeficientes LPCC
+    ![lpccout](https://user-images.githubusercontent.com/113842807/210063690-d51dac6f-e2ac-4138-868c-a68eaba94783.png)
+    
+    . Coeficientes MFCC
+    ![mfccout](https://user-images.githubusercontent.com/113842807/210063694-996a7fd9-bcaa-4e19-9f1d-7764a6c48244.png)
+
     
   + ¿Cuál de ellas le parece que contiene más información?
 

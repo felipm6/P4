@@ -177,6 +177,8 @@ ejercicios indicados.
   
 - Según la teoría, ¿qué parámetros considera adecuados para el cálculo de los coeficientes LPCC y MFCC?
 
+  · La teoria nos dice que para speaker recognition se usan un minimo de 24 coeficientes, nosotros de momento estamos usando 20/30 para probar que nos da mejores resultados.
+
 ### Entrenamiento y visualización de los GMM.
 
 Complete el código necesario para entrenar modelos GMM.

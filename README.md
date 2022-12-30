@@ -86,6 +86,24 @@ ejercicios indicados.
   
   + Indique **todas** las órdenes necesarias para obtener las gráficas a partir de las señales 
     parametrizadas.
+    
+    · Primero necesitamos obtener los ficheros de texto con los diferentes coeficientes. En nuestro caso hemos escojido el locutor 22 del bloque 2.
+    · Codigo coefs `lp`:
+    ```
+    fmatrix_show work/lp/BLOCK02/SES022/*.lp | egrep '^\[' | cut -f4,5 > lpout.txt
+    ```
+    
+    · Codigo coefs `lpcc`:
+    ```
+    fmatrix_show work/lpcc/BLOCK02/SES022/*.lpcc | egrep '^\[' | cut -f4,5 > lpccout.txt
+    ```
+    
+    · Codigo coefs `mfcc`:
+    ```
+    fmatrix_show work/mfcc/BLOCK02/SES022/*.mfcc | egrep '^\[' | cut -f4,5 > mfccout.txt
+    ```
+    
+    
   + ¿Cuál de ellas le parece que contiene más información?
 
 - Usando el programa <code>pearson</code>, obtenga los coeficientes de correlación normalizada entre los

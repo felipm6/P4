@@ -161,15 +161,19 @@ ejercicios indicados.
 
     
   + ¿Cuál de ellas le parece que contiene más información?
+  
+  · La que tiemes mas información es la LPCC ya que los coeficientes estan mejor distribuidos por el plano lo que elimina dependencias y correlaciones. El caso contrario seria el LP que practicamente siguen una funcion lineal y nos aporta menos información.
 
 - Usando el programa <code>pearson</code>, obtenga los coeficientes de correlación normalizada entre los
   parámetros 2 y 3 para un locutor, y rellene la tabla siguiente con los valores obtenidos.
 
   |                        | LP   | LPCC | MFCC |
   |------------------------|:----:|:----:|:----:|
-  | &rho;<sub>x</sub>[2,3] |      |      |      |
+  | &rho;<sub>x</sub>[2,3] |   -0.683414   |   0.286001   |   0.31916   |
   
   + Compare los resultados de <code>pearson</code> con los obtenidos gráficamente.
+  
+  · Como podemos ver LP (en valor absoluto), nos da una rho mucho mas alta, eso significa que estan mas correlados los coeficientes. En cambio con LPCC y MFCC tenemos rhos mucho mas pequeñas, lo que era de esperar viendo las. gràficas anteriores.
   
 - Según la teoría, ¿qué parámetros considera adecuados para el cálculo de los coeficientes LPCC y MFCC?
 

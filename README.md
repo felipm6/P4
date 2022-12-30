@@ -185,10 +185,16 @@ Complete el código necesario para entrenar modelos GMM.
 
 - Inserte una gráfica que muestre la función de densidad de probabilidad modelada por el GMM de un locutor
   para sus dos primeros coeficientes de MFCC.
+  
+![s22](https://user-images.githubusercontent.com/113842807/210066388-d3b702bb-17cf-4b74-b239-7efa32565017.png)
 
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos (la gŕafica
   de la página 20 del enunciado puede servirle de referencia del resultado deseado). Analice la capacidad
   del modelado GMM para diferenciar las señales de uno y otro.
+  
+<img width="677" alt="Captura de pantalla 2022-12-30 a les 12 55 52" src="https://user-images.githubusercontent.com/113842807/210067768-2d764d3c-23fe-4369-9e76-673b887b8770.png">
+
+· En este caso es un poco dificil diferenciar las regiones de un locutor y de otro ya que son muy parecidas, pero basicamente para que se reconozca como uno u otro tienen que coincidir proporcionalmente las regiones con el numero de puntos que hay en ellos. Como podemos ver cuando usamos el modelo correcto las regiones coinciden con los porcentajes.
 
 ### Reconocimiento del locutor.
 

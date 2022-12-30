@@ -223,7 +223,7 @@ for cmd in $*; do
 
         #umbral optimo encontrado con comando: verify verifyerr
        perl -ane 'print "$F[0]\t$F[1]\t";
-        if ($F[2] > 0.366141481293663) {print "1\n"}
+        if ($F[2] > -0.633289075879961) {print "1\n"}
         else {print "0\n"}' $TEMP_VERIF | tee $FINAL_VERIF
 
    # If the command is not recognize, check if it is the name

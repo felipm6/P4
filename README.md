@@ -216,6 +216,57 @@ Complete el código necesario para realizar verificación del locutor y optimice
   pérdidas, y el score obtenido usando la parametrización que mejor resultado le hubiera dado en la tarea
   de reconocimiento.
   
+  · LP
+  
+```
+run_spkid lp train test classerr trainworld verify verifyerr
+```
+
+
+```
+==============================================
+THR: 0.352495837299997
+Missed:     77/250=0.3080
+FalseAlarm: 33/1000=0.0330
+----------------------------------------------
+==> CostDetection: 60.5
+==============================================
+
+  
+  · LPCC
+  
+```
+run_spkid lpcc train test classerr trainworld verify verifyerr
+```
+```
+==============================================
+THR: 0.225709580003806
+Missed:     4/250=0.0160
+FalseAlarm: 6/1000=0.0060
+----------------------------------------------
+==> CostDetection: 7.0
+==============================================
+
+```
+
+
+
+```
+run_spkid mfcc train test classerr trainworld verify verifyerr
+```
+
+
+```
+==============================================
+THR: 0.999863166415197
+Missed:     166/250=0.6640
+FalseAlarm: 9/1000=0.0090
+----------------------------------------------
+==> CostDetection: 74.5
+==============================================
+```
+
+
 
  
 ### Test final

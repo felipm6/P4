@@ -82,7 +82,7 @@ compute_lp() {
     shift
     for filename in $(sort $*); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2lp 20 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        EXEC="wav2lp 30 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
         echo $EXEC && $EXEC || exit 1
     done
 }
@@ -92,7 +92,7 @@ compute_lpcc() {
     shift
     for filename in $(sort $*); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2lpcc 20 30 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        EXEC="wav2lpcc 24 24 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
         echo $EXEC && $EXEC || exit 1
     done
 }
@@ -135,7 +135,7 @@ for cmd in $*; do
        for dir in $db_devel/BLOCK*/SES* ; do
            name=${dir/*\/}
            echo $name ----
-           EXEC="gmm_train -v 1 -T 0.001 -N 5 -m 2 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$name.gmm $lists/class/$name.train"
+           EXEC="gmm_train -v 1 -T 0.0001 -N 60 -m 30 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$name.gmm $lists/class/$name.train"
            echo $EXEC && $EXEC || exit 1
            echo
        done
@@ -161,7 +161,7 @@ for cmd in $*; do
        # Implement 'trainworld' in order to get a Universal Background Model for speaker verification
        #
        # - The name of the world model will be used by gmm_verify in the 'verify' command below.
-       EXEC="gmm_train -d $w/$FEAT/ -e $FEAT -g $w/gmm/$FEAT/$world.gmm -m 5 -N 10 -T 0.0001 -i 0 lists/verif/$world.train"
+       EXEC="gmm_train -d $w/$FEAT/ -e $FEAT -g $w/gmm/$FEAT/$world.gmm -m 30 -N 60 -T 0.00001 lists/verif/$world.train"
        echo $EXEC && $EXEC || exit 1
 
    elif [[ $cmd == verify ]]; then
@@ -218,7 +218,7 @@ for cmd in $*; do
        # si se considera al candidato legítimo, o 0, si se considera impostor. Las instrucciones para
        # realizar este cambio de formato están en el enunciado de la práctica.
        compute_$FEAT $db_test $lists/final/verif.test
-        EXEC="gmm_verify -d $w/$FEAT/ -e $FEAT -D $w/gmm/$FEAT/ -E gmm -w $world lists/gmm.list lists/final/all.test lists/final/verif.test.candidates"
+        EXEC="gmm_verify -d $w/$FEAT/ -e $FEAT -D $w/gmm/$FEAT/ -E gmm -w $world $lists/gmm.list $lists/final/verif.test $lists/final/verif.test.candidates"
        echo $EXEC && $EXEC | tee $TEMP_VERIF || exit 1
 
         #umbral optimo encontrado con comando: verify verifyerr

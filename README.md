@@ -231,7 +231,7 @@ FalseAlarm: 33/1000=0.0330
 ----------------------------------------------
 ==> CostDetection: 60.5
 ==============================================
-
+```
   
   · LPCC
   
@@ -249,7 +249,7 @@ FalseAlarm: 6/1000=0.0060
 
 ```
 
-
+  ·MFCC
 
 ```
 run_spkid mfcc train test classerr trainworld verify verifyerr
